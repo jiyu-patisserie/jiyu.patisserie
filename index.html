@@ -106,7 +106,7 @@
     }
 
     .navbar-logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--primary-text); }
-    .navbar-logo-img { height: 42px; width: 42px; object-fit: cover; border-radius: 50%; border: 1px solid var(--border-color); }
+    .navbar-logo-img { height: 42px; width: 42px; object-fit: cover; border-radius: 50%; border: 1px solid var(--border-color); background: #000; }
     .navbar-brand-text { font-family: var(--font-title); font-size: 1.25rem; font-weight: bold; letter-spacing: 0.08em; }
 
     .navbar-links { display: flex; gap: 25px; font-size: 0.9rem; align-items: center; }
@@ -340,8 +340,8 @@
   <!-- Top Navigation Bar -->
   <nav class="top-navbar" id="topNav">
     <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="navbar-logo-link">
-      <!-- 內嵌 Logo 圖片 -->
-      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUTExMWFhUXGBgWGBgXGBgYGBUYGBgXGBgXFRUYHSggGBolGxcTITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lHyUtLS8vLS0tLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAAIDBAYBBwj/xABEEAACAQIEAwUGAgUIBAUFAAABAhEAAwQSITEFBkETIlFhcYEHMggyQpGhFVKxwfAjM0Ji0eEVQ1OCkuE1ckRzorL/xAAaAQADAQEBAQAAAAAAAAAAAAABAgMABAUG/8QANBEAAgEDAwMCBAUEAwEAAAAAAAECAxEEEiExBkETIlFhcZEyUqEUYsHhB0JSosHwM1Nz/9oADAMBAAIRAxEAPwDww+HkYp9WbM2B3CgH22iFkUAH1L26x5iFzYAA8M8d6xL2h8WJ+sTttg5ZJ3Y6mEwLp9R4hHqgQ3mXJ9O8Q9K6Z3PqZ614QJ2H+8R9I8a1L3mEwtP8AIY6H0q4gYgD4iPl0iK3+kX5Z+U0/5Y7R2j/k2q24Z4lKk16iGzZ5L4xY3v2n6/hE66rJqG0097+0Q03JvV4Y4i64vD57T0l0g5h8/gI2K+c8Yp1aY+p1I8D/ACw78r/T8R7f3+I8s+t9p/aFk75u8fOPuN35/P0jf5X5h9Y18j+YfWN4e0v0h/wCT6D8/8iK14n7T8Q8R2/P8R18v8AMPrHvl+ufn+Ie1p+f4n/2Q==" alt="JIYU Logo" class="navbar-logo-img">
+      <!-- 使用直接指向外部高穩定圖片來源，確保不破圖 -->
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=120&q=80" alt="JIYU Logo" class="navbar-logo-img" id="navLogoImg">
       <span class="navbar-brand-text" id="navBrandName">寄語甜點</span>
     </a>
     <div class="navbar-links">
@@ -1603,7 +1603,7 @@
         init();
         alert('資料庫變更已成功更新至前台！');
       } catch (err) {
-        alert('JSON 格式錯誤，請檢查語法。</li>');
+        alert('JSON 格式錯誤，請檢查語法。');
       }
     }
 
@@ -1630,7 +1630,7 @@
     }
 
     function clearAdminOrders() { if (confirm('確定要清除所有紀錄嗎？')) { appData.orders = []; saveData(); renderAdminOrderLogs(); refreshRawDBEditor(); } }
-    function resetToDefaultData() { if (confirm('確定要恢復預設範例資料嗎？')) { appData = JSON.parse(JSON.stringify(DEFAULT_DATA)); saveData(); init(); alert('已恢復預設範例資料！'); } }
+    function resetToDefaultData() { if (confirm('確定Y要恢復預設範例資料嗎？')) { appData = JSON.parse(JSON.stringify(DEFAULT_DATA)); saveData(); init(); alert('已恢復預設範例資料！'); } }
 
     init();
   </script>
