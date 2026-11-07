@@ -340,8 +340,8 @@
   <!-- Top Navigation Bar -->
   <nav class="top-navbar" id="topNav">
     <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="navbar-logo-link">
-      <!-- 使用直接指向外部高穩定圖片來源，確保不破圖 -->
-      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=120&q=80" alt="JIYU Logo" class="navbar-logo-img" id="navLogoImg">
+      <!-- 使用您剛才上傳的專屬 JIYU Logo 圖片 -->
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=" alt="JIYU Logo" class="navbar-logo-img" id="navLogoImg">
       <span class="navbar-brand-text" id="navBrandName">寄語甜點</span>
     </a>
     <div class="navbar-links">
@@ -1630,7 +1630,7 @@
     }
 
     function clearAdminOrders() { if (confirm('確定要清除所有紀錄嗎？')) { appData.orders = []; saveData(); renderAdminOrderLogs(); refreshRawDBEditor(); } }
-    function resetToDefaultData() { if (confirm('確定Y要恢復預設範例資料嗎？')) { appData = JSON.parse(JSON.stringify(DEFAULT_DATA)); saveData(); init(); alert('已恢復預設範例資料！'); } }
+    function resetToDefaultData() { if (confirm('確定要恢復預設範例資料嗎？')) { appData = JSON.parse(JSON.stringify(DEFAULT_DATA)); saveData(); init(); alert('已恢復預設範例資料！'); } }
 
     init();
   </script>
