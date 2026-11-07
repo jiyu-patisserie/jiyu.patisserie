@@ -975,7 +975,7 @@
 
     function saveData() { localStorage.setItem('jiyu_app_data', JSON.stringify(appData)); }
 
-    function init() {
+   function init() {
       renderBrandTexts();
       renderProducts();
       renderTempCartUI();
@@ -986,6 +986,11 @@
       renderAdminOrderLogs();
       syncAdminInputs();
       refreshRawDBEditor();
+
+      // 自動檢查網址是否有 #admin，若有則直接啟動後台登入
+      if (window.location.hash === '#admin') {
+        switchView('admin');
+      }
     }
 
     function renderBrandTexts() {
