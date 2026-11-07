@@ -202,7 +202,6 @@
     .detail-tab-btn:last-child { border-right: none; }
     .detail-tab-btn.active { color: var(--brand-brown); font-weight: bold; }
     
-    /* 頁籤內文與照片置中樣式 */
     .detail-tab-content { font-size: 0.9rem; color: #555; line-height: 1.7; text-align: center; }
     .detail-tab-content img { max-width: 100%; height: auto; border-radius: 6px; margin: 15px auto; display: block; }
 
@@ -243,8 +242,6 @@
     .checkout-cart-table td { padding: 16px 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
     .btn-qty-mini { width: 28px; height: 28px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
     .btn-remove-item { background: none; border: none; font-size: 1.2rem; color: #999; cursor: pointer; }
-    .btn-line-login { width: 100%; background: #06C755; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .btn-normal-login { width: 100%; background: #7a8288; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 0.95rem; cursor: pointer; }
 
     .form-group { margin-bottom: 22px; }
     .form-label { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; color: var(--primary-text); }
@@ -475,11 +472,6 @@
             <span>訂購人聯絡資訊</span>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
-            <button type="button" class="btn-line-login"><i class="fa-brands fa-line" style="font-size:1.2rem;"></i> 快速登入</button>
-            <button type="button" class="btn-normal-login">會員登入</button>
-          </div>
-
           <form id="mainCheckoutForm">
             <div class="form-group">
               <label class="form-label">購買人聯絡方式 <span class="req">*</span></label>
@@ -669,18 +661,35 @@
       </div>
 
       <div class="admin-card">
-        <div class="admin-title"><span><i class="fa-solid fa-truck"></i> 黑貓宅配運費與免運規則</span></div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="admin-title"><span><i class="fa-solid fa-truck"></i> 黑貓宅配運費與免運規則（區分溫層）</span></div>
+        
+        <!-- 常溫運費與免運 -->
+        <h4 style="margin-bottom: 10px; color: var(--brand-brown);"><i class="fa-solid fa-sun"></i> 常溫配送設定</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
           <div class="form-group">
-            <label class="form-label">宅配基本運費 (NT$)</label>
-            <input type="number" id="adminShippingFee" class="form-control" value="180">
+            <label class="form-label">常溫基本運費 (NT$)</label>
+            <input type="number" id="adminShippingFeeRoom" class="form-control" value="180">
           </div>
           <div class="form-group">
-            <label class="form-label">滿幾盒享免運</label>
-            <input type="number" id="adminFreeShippingQty" class="form-control" value="3">
+            <label class="form-label">常溫滿幾盒享免運</label>
+            <input type="number" id="adminFreeShippingQtyRoom" class="form-control" value="3">
           </div>
         </div>
-        <button class="btn-sm btn-primary" onclick="saveAdminShipping()">儲存運費規則</button>
+
+        <!-- 冷凍運費與免運 -->
+        <h4 style="margin-bottom: 10px; color: #2980b9;"><i class="fa-solid fa-snowflake"></i> 冷凍配送設定</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label class="form-label">冷凍基本運費 (NT$)</label>
+            <input type="number" id="adminShippingFeeFrozen" class="form-control" value="225">
+          </div>
+          <div class="form-group">
+            <label class="form-label">冷凍滿幾盒享免運</label>
+            <input type="number" id="adminFreeShippingQtyFrozen" class="form-control" value="4">
+          </div>
+        </div>
+
+        <button class="btn-sm btn-primary" onclick="saveAdminShipping()">儲存雙溫層運費規則</button>
       </div>
     </div>
 
@@ -944,24 +953,32 @@
           id: 'mac5',
           name: '馬卡龍 盒裝5入',
           subDesc: '嚴選頂級原料，酥脆外殼搭配濕潤內餡',
-          temp: 'room',
-          price: 90,
+          temp: 'frozen',
+          price: 450,
           flavors: '香草, 伯爵茶, 鐵觀音, 紅烏龍',
           tab1: '嚴選頂級原料，傳統工法製作，酥脆外殼搭配濕潤內餡，帶來優雅迷人的經典風味。',
           tab2: '法國奶油 | 杏仁粉\n5入盒裝 | 蛋奶素',
-          tab3: '門市自取、黑貓常溫宅配 (滿 3 盒免運)',
+          tab3: '門市自取、黑貓低溫冷凍宅配 (滿 4 盒免運)',
           image: 'https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80',
           status: 'active'
         }
       ],
       dates: ['11/16', '11/23', '11/30'],
       timeSlots: ['12:00 - 13:00', '16:00 - 17:00', '18:00 - 19:00', '其他 (請於備註說明)'],
-      shippingFee: 180,
-      freeShippingQty: 3,
+      shippingFeeRoom: 180,
+      freeShippingQtyRoom: 3,
+      shippingFeeFrozen: 225,
+      freeShippingQtyFrozen: 4,
       orders: []
     };
 
     let appData = JSON.parse(localStorage.getItem('jiyu_app_data')) || DEFAULT_DATA;
+    // 補齊舊資料缺少的雙溫層設定
+    if (appData.shippingFeeRoom === undefined) appData.shippingFeeRoom = appData.shippingFee || 180;
+    if (appData.freeShippingQtyRoom === undefined) appData.freeShippingQtyRoom = appData.freeShippingQty || 3;
+    if (appData.shippingFeeFrozen === undefined) appData.shippingFeeFrozen = 225;
+    if (appData.freeShippingQtyFrozen === undefined) appData.freeShippingQtyFrozen = 4;
+
     let cart = {};
     let currentActiveTemp = 'room';
     let currentDetailProductId = null;
@@ -991,7 +1008,12 @@
       document.getElementById('dispStoryText').innerText = appData.storyText || '';
       document.getElementById('dispFooterTitle').innerText = `JIYU_patisserie ${appData.brandName || '寄語甜點'}`;
       document.getElementById('dispFooterAddress').innerText = `地址: ${appData.pickupLocation || '花蓮市中華路63號 『惠比須餅舖店旁門口 等候領取』'}`;
-      document.getElementById('shippingDescNote').innerText = `運費 $${appData.shippingFee} (滿 ${appData.freeShippingQty} 盒免運)`;
+      
+      // 動態渲染對應溫層的宅配說明
+      const fee = currentActiveTemp === 'room' ? appData.shippingFeeRoom : appData.shippingFeeFrozen;
+      const freeQty = currentActiveTemp === 'room' ? appData.freeShippingQtyRoom : appData.freeShippingQtyFrozen;
+      const tempLabel = currentActiveTemp === 'room' ? '常溫' : '冷凍';
+      document.getElementById('shippingDescNote').innerText = `${tempLabel}運費 $${fee} (滿 ${freeQty} 盒免運)`;
     }
 
     function getProductAvailableDates(p) {
@@ -1100,6 +1122,7 @@
       if (p) currentActiveTemp = p.temp || 'room';
 
       closeDetailModal();
+      switchTempCart(currentActiveTemp);
       updateCartUI();
 
       if (gotoCheckout) {
@@ -1131,6 +1154,7 @@
       document.getElementById('btnTempRoom').classList.toggle('active', tempMode === 'room');
       document.getElementById('btnTempFrozen').classList.toggle('active', tempMode === 'frozen');
       document.getElementById('tempNoticeDesc').innerHTML = (tempMode === 'room') ? `門市取貨、黑貓常溫配送` : `門市取貨、黑貓低溫冷凍配送`;
+      renderBrandTexts();
       renderTempCartUI();
       renderDateOptions();
       updateSummary();
@@ -1182,7 +1206,8 @@
 
       for (const [pId, qty] of Object.entries(cart)) {
         const product = appData.products.find(p => p.id === pId);
-        if (product && qty > 0) {
+        // 結帳頁面僅顯示當前選擇溫層的商品，避免混淆
+        if (product && (product.temp || 'room') === currentActiveTemp && qty > 0) {
           const itemSub = product.price * qty;
           tbodyHtml += `
             <tr>
@@ -1235,13 +1260,17 @@
         }
       }
 
-      if (totalQty === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; opacity:0.6; padding:30px 0;">購物車內尚無商品</td></tr>`;
+      if (!tbodyHtml) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; opacity:0.6; padding:30px 0;">目前【${currentActiveTemp === 'room' ? '常溫' : '冷凍'}】購物車內尚無商品</td></tr>`;
         document.getElementById('sbCartSummaryList').innerHTML = `<div style="font-size:0.85rem; color:#888;">尚無選購商品</div>`;
-        drawerBody.innerHTML = `<div style="text-align:center; color:#888; padding:40px 0;">購物車內尚無商品</div>`;
       } else {
         tbody.innerHTML = tbodyHtml;
         document.getElementById('sbCartSummaryList').innerHTML = sbListHtml;
+      }
+
+      if (totalQty === 0) {
+        drawerBody.innerHTML = `<div style="text-align:center; color:#888; padding:40px 0;">購物車內尚無商品</div>`;
+      } else {
         drawerBody.innerHTML = drawerHtml;
       }
 
@@ -1262,12 +1291,12 @@
       let intersected = null;
       activeCartIds.forEach(id => {
         const p = appData.products.find(item => item.id === id);
-        if (p) {
+        if (p && (p.temp || 'room') === currentActiveTemp) {
           const pDates = getProductAvailableDates(p);
           intersected = (intersected === null) ? [...pDates] : intersected.filter(d => pDates.includes(d));
         }
       });
-      return intersected || [];
+      return intersected || appData.dates;
     }
 
     function renderDateOptions() {
@@ -1319,13 +1348,18 @@
 
       for (const [pId, qty] of Object.entries(cart)) {
         const product = appData.products.find(p => p.id === pId);
-        if (product && qty > 0) {
+        // 只計算當前溫層購物車的金額與盒數
+        if (product && (product.temp || 'room') === currentActiveTemp && qty > 0) {
           subtotal += qty * product.price;
           totalBoxes += qty;
         }
       }
 
-      let shippingCost = (deliveryMode === 'shipping') ? ((totalBoxes >= appData.freeShippingQty) ? 0 : appData.shippingFee) : 0;
+      // 根據當前溫層判定運費與免運門檻
+      const baseFee = currentActiveTemp === 'room' ? appData.shippingFeeRoom : appData.shippingFeeFrozen;
+      const freeThreshold = currentActiveTemp === 'room' ? appData.freeShippingQtyRoom : appData.freeShippingQtyFrozen;
+
+      let shippingCost = (deliveryMode === 'shipping') ? ((totalBoxes >= freeThreshold) ? 0 : baseFee) : 0;
       const grandTotal = subtotal > 0 ? subtotal + shippingCost : 0;
 
       document.getElementById('sbSubtotal').innerText = `NT$${subtotal.toLocaleString()}`;
@@ -1334,9 +1368,16 @@
     }
 
     function generateOrder() {
-      const totalQty = Object.values(cart).reduce((a, b) => a + b, 0);
-      if (totalQty === 0) {
-        alert('請先選購商品加入購物車！');
+      let activeTempQty = 0;
+      for (const [pId, qty] of Object.entries(cart)) {
+        const product = appData.products.find(p => p.id === pId);
+        if (product && (product.temp || 'room') === currentActiveTemp && qty > 0) {
+          activeTempQty += qty;
+        }
+      }
+
+      if (activeTempQty === 0) {
+        alert(`請先選購【${currentActiveTemp === 'room' ? '常溫' : '冷凍'}】商品加入購物車！`);
         return;
       }
 
@@ -1534,8 +1575,10 @@
     function syncAdminInputs() {
       document.getElementById('adminDatesInput').value = appData.dates.join(', ');
       document.getElementById('adminSlotsInput').value = appData.timeSlots.join(', ');
-      document.getElementById('adminShippingFee').value = appData.shippingFee;
-      document.getElementById('adminFreeShippingQty').value = appData.freeShippingQty;
+      document.getElementById('adminShippingFeeRoom').value = appData.shippingFeeRoom;
+      document.getElementById('adminFreeShippingQtyRoom').value = appData.freeShippingQtyRoom;
+      document.getElementById('adminShippingFeeFrozen').value = appData.shippingFeeFrozen;
+      document.getElementById('adminFreeShippingQtyFrozen').value = appData.freeShippingQtyFrozen;
       document.getElementById('adminBrandName').value = appData.brandName || '';
       document.getElementById('adminBrandDesc').value = appData.brandDesc || '';
       document.getElementById('adminStoryTitle').value = appData.storyTitle || '';
@@ -1545,7 +1588,13 @@
 
     function saveAdminDates() { appData.dates = document.getElementById('adminDatesInput').value.split(',').map(s => s.trim()).filter(Boolean); saveData(); renderDateOptions(); refreshRawDBEditor(); alert('日期設定已儲存！'); }
     function saveAdminSlots() { appData.timeSlots = document.getElementById('adminSlotsInput').value.split(',').map(s => s.trim()).filter(Boolean); saveData(); renderTimeSlotOptions(); refreshRawDBEditor(); alert('時段設定已儲存！'); }
-    function saveAdminShipping() { appData.shippingFee = parseInt(document.getElementById('adminShippingFee').value) || 180; appData.freeShippingQty = parseInt(document.getElementById('adminFreeShippingQty').value) || 3; saveData(); renderBrandTexts(); updateSummary(); refreshRawDBEditor(); alert('運費規則已儲存！'); }
+    function saveAdminShipping() { 
+      appData.shippingFeeRoom = parseInt(document.getElementById('adminShippingFeeRoom').value) || 180; 
+      appData.freeShippingQtyRoom = parseInt(document.getElementById('adminFreeShippingQtyRoom').value) || 3; 
+      appData.shippingFeeFrozen = parseInt(document.getElementById('adminShippingFeeFrozen').value) || 225; 
+      appData.freeShippingQtyFrozen = parseInt(document.getElementById('adminFreeShippingQtyFrozen').value) || 4; 
+      saveData(); renderBrandTexts(); updateSummary(); refreshRawDBEditor(); alert('雙溫層運費規則已儲存！'); 
+    }
     function saveAdminStory() { appData.brandName = document.getElementById('adminBrandName').value.trim(); appData.brandDesc = document.getElementById('adminBrandDesc').value.trim(); appData.storyTitle = document.getElementById('adminStoryTitle').value.trim(); appData.storyText = document.getElementById('adminStoryText').value.trim(); appData.pickupLocation = document.getElementById('adminPickupLocation').value.trim(); saveData(); renderBrandTexts(); refreshRawDBEditor(); alert('品牌文案已更新！'); }
 
     function refreshRawDBEditor() {
