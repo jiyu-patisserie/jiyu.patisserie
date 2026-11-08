@@ -110,15 +110,16 @@
       z-index: 100;
     }
 
-    .navbar-logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--primary-text); }
-    .navbar-logo-img { height: 48px; width: 48px; object-fit: contain; background: transparent; }
-    .navbar-brand-text { font-family: var(--font-title); font-size: 1.25rem; font-weight: bold; letter-spacing: 0.08em; }
+    .navbar-logo-link { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--primary-text); }
+    .navbar-logo-img { height: 62px; width: 62px; object-fit: contain; background: transparent; }
+    .navbar-brand-text { font-family: var(--font-title); font-size: 1.6rem; font-weight: bold; letter-spacing: 0.08em; }
 
-    .navbar-links { display: flex; gap: 25px; font-size: 0.9rem; align-items: center; }
+    .navbar-links { display: flex; gap: 34px; font-size: 1.1rem; align-items: center; }
     .navbar-links a { text-decoration: none; color: var(--primary-text); transition: color 0.2s; }
     .navbar-links a:hover { color: var(--brand-brown); }
 
-    @media (max-width: 768px) { .navbar-links { display: none; } }
+    @media (max-width: 1100px) { .navbar-links { gap: 20px; font-size: 1rem; } .navbar-brand-text { font-size: 1.4rem; } .navbar-logo-img { height: 54px; width: 54px; } }
+    @media (max-width: 768px) { .navbar-links { display: none; } .navbar-logo-img { height: 48px; width: 48px; } .navbar-brand-text { font-size: 1.3rem; } }
 
     /* Floating Cart Button */
     .floating-cart-btn {
